@@ -1,0 +1,11 @@
+<div class="container">
+  <div ng-repeat="book in bookList">
+    <img ng-src="{{book.coverImgUrl}}"/>
+    <p>{{book.title}}</p>
+    <p ng-show="{{book.genre}}">{{book.genre}}</p>
+    <p>{{book.description}}</p>
+    <p>{{book.author_one}}</p>
+    <p ng-show="{{book.author_two}}">{{book.author_two}}</p>
+    <p ng-show="{{book.author_two}}">{{book.author_three}}</p>
+  </div>
+</div>

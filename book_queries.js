@@ -1,7 +1,7 @@
 var knex = require('./db/knex');
 
 function Books() {
-  return knex('books')
+  return knex('books');
 }
 
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
                    description: body.description,
                    author_one: body.author_one,
                    author_two: body.author_two,
-                   author_three: body.author_three 
+                   author_three: body.author_three
                 });
     },
     updateBook: function(id, body) {
@@ -34,7 +34,7 @@ module.exports = {
                    description: body.description,
                    author_one: body.author_one,
                    author_two: body.author_two,
-                   author_three: body.author_three 
+                   author_three: body.author_three
                 });
     },
     deleteBook: function(id) {

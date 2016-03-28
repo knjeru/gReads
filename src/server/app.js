@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, '../client/')));
 
 // *** main routes *** //
 app.get('/', function(req,res,next) {
-    res.sendFile(path.join(__dirname, '../client/app/views', 'index.html'));
+    res.sendFile(path.join(__dirname, '../client/app/', 'index.html'));
 });
 app.use('/', routes);
 app.use('/api/books', books);
