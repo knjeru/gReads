@@ -8,21 +8,12 @@ var bodyParser = require('body-parser');
 
 // *** routes *** //
 var routes = require('./routes/index.js');
+var books = require('./routes/books.js');
+var authors = require('./routes/authors.js');
 
 
 // *** express instance *** //
 var app = express();
-
-
-// *** view engine *** //
-var swig = new swig.Swig();
-app.engine('html', swig.renderFile);
-app.set('view engine', 'html');
-
-
-// *** static directory *** //
-app.set('views', path.join(__dirname, 'views'));
-
 
 // *** config middleware *** //
 app.use(logger('dev'));
@@ -37,6 +28,8 @@ app.get('/', function(req,res,next) {
     res.sendFile(path.join(__dirname, '../client/app/views', 'index.html'));
 });
 app.use('/', routes);
+app.use('/api/books', books);
+app.use('/api/authors', authors);
 
 
 // catch 404 and forward to error handler
