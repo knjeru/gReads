@@ -1,41 +1,40 @@
 'use strict';
 
 angular.module('gRead')
-  .controller('LoginCtrl', ['$scope', '$auth', '$location', function($scope,$auth, $location) {
-    // $scope.authenticate = function(provider) {
-    //   $auth.authenticate(provider)
-    // }
+  .controller('LoginCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'Auth',
+    function ($rootScope, $scope, $location, $localStorage, Auth) {
+        function successAuth(res) {
+            $localStorage.token = res.token;
+            window.location = "/";
+        }
 
-    var user = {
-      email: $scope.email,
-      password: $scope.password
-    }
+        $scope.login = function () {
+            var formData = {
+                email: $scope.email,
+                password: $scope.password
+            };
 
-    var newUser = {
-      firstName: $scope.firstName,
-      lastName: $scope.lastName,
-      email: $scope.email,
-      password: $scope.password
-    };
+            Auth.signin(formData, successAuth, function () {
+                $rootScope.error = 'Invalid credentials.';
+            });
+        };
 
-    $auth.signup(user)
-      .then(function(res) {
+        $scope.signup = function () {
+            var formData = {
+                email: $scope.email,
+                password: $scope.password
+            };
 
-      })
-      .catch(function(res) {
+            Auth.signup(formData, successAuth, function () {
+                $rootScope.error = 'Failed to signup';
+            });
+        };
 
-      });
-
-    $auth.login(user)
-      .then(function(res) {
-        $location.url('/login');
-      })
-      .catch(function(res) {
-        $location.url('/register');
-      });
-
-    $scope.isAuthenticated = function() {
-      return $auth.isAuthenticated();
-    };
-    
+        $scope.logout = function () {
+            Auth.logout(function () {
+                window.location = "/";
+            });
+        };
+        $scope.token = $localStorage.token;
+        $scope.tokenClaims = Auth.getTokenClaims();
   }]);

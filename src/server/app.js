@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var request = require('request');
+var protectApi = express.Router();
 
 // *** routes *** //
 var routes = require('./routes/index.js');
@@ -62,10 +63,10 @@ app.get('/', function(req,res,next) {
     res.sendFile(path.join(__dirname, '../client/app/', 'index.html'));
 });
 app.use('/', routes);
+app.use('/auth', authorization);
 app.use('/api', protectApi);
 app.use('/api/books', books);
 app.use('/api/authors', authors);
-app.use('/api/auth', authorization);
 
 
 // catch 404 and forward to error handler
