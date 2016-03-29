@@ -25,7 +25,7 @@ module.exports = {
                 });
     },
     updateBook: function(id, body) {
-        return Books
+        return Books()
                 .where('id', id)
                 .update({
                    title: body.title,
@@ -38,7 +38,7 @@ module.exports = {
                 });
     },
     deleteBook: function(id) {
-        return Books
+        return Books()
                 .where('id', id)
                 .del();
     }

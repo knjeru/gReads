@@ -1,1 +1,31 @@
-
+<div class="container">
+  <form ng-submit="updateBook()">
+    <div class="form-group">
+      <label for="">Title</label>
+      <input type="text" class="form-control" id="" placeholder="Enter Title" ng-model="bookFormData.title" ng-value="book.title">
+    </div>
+    <label for="">Genre</label>
+    <select ng-model="bookFormData.genre" ng-value="book.genre">
+      <option ng-value="book.genre" selected>{{book.genre}}</option>
+      <option value="javascript">Javascript</option>
+      <option value="python">Python</option>
+    </select>
+    <div class="form-group">
+      <label for="">Book Cover</label>
+      <input type="url" class="form-control" id="" placeholder="Enter Title" ng-model="bookFormData.coverImgUrl" ng-value="book.coverImgUrl">
+    </div>
+    <div class="form-group">
+      <label for="">Add An Author</label>
+      <select ng-model="bookFormData.author_one">
+        <option value="option" ng-repeat="author in authorsList">{{author.first_name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="">Description</label>
+      <input type="text" ng-model="bookFormData.description" ng-value="book.description">
+    </div>
+    <button class="btn btn-success" type="submit" name="button">Update Book</button>
+    <button class="btn btn-danger" type="button" name="button" ng-click="deleteBook()">Delete</button>
+    <a ng-href="#/book/{{book.id}}"><button class="btn btn-warning" type="button" name="button">Cancel</button></a>
+  </form>
+</div>

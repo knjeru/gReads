@@ -1,0 +1,12 @@
+<div class="container">
+  <div ng-repeat="author in authorList">
+    <div class="row">
+      <a ng-href="#/author/{{author.id}}">
+        <img ng-src="{{author.portraitUrl}}"/>
+      </a>
+      <p>{{author.first_name}}</p>
+      <p>{{author.last_name}}</p>
+      <p>{{author.bio}}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="col-md-6">
+    <img ng-src="{{book.coverImgUrl}}"/>
+    <p>{{book.title}}</p>
+    <p ng-show="{{book.genre}}">{{book.genre}}</p>
+    <p>{{book.description}}</p>
+    <p>{{book.author_one}}</p>
+    <p ng-show="{{book.author_two}}">{{book.author_two}}</p>
+    <p ng-show="{{book.author_two}}">{{book.author_three}}</p>
+    <a ng-href="#/book/{{book.id}}/edit"><button class="btn-lg btn-warning"type="button" name="button">Edit</button></a>
+  </div>
+</div>

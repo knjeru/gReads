@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('gRead', ['ui.router', 'door3.css'])
-.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+angular.module('gRead', ['ui.router', 'door3.css', 'satellizer', 'ngStorage'])
+.config(['$stateProvider', '$urlRouterProvider', '$localStorage',function($stateProvider, $urlRouterProvider,$localStorage){
 
   $urlRouterProvider.otherwise('/');
 
@@ -49,5 +49,10 @@ angular.module('gRead', ['ui.router', 'door3.css'])
       url: '/author/:id/edit',
       templateUrl: '/app/authors/views/edit.html',
       controller: 'SingleAuthorCtrl',
+    })
+    .state('login', {
+      url:'/login',
+      templateUrl: '/app/authorization/views/login',
+      controller: 'LoginCtrl'
     });
 }]);

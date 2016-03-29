@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('gRead')
-.controller('MainBookCtrl',['$scope', 'bookServiceApi','$location', function($scope, bookServiceApi, $location){
+.controller('MainBookCtrl',['$scope', 'bookServiceApi','$location', 'authorServiceApi',function($scope,bookServiceApi,$location,authorServiceApi){
 
   $scope.bookList = {};
   $scope.bookFormData = {};
@@ -9,6 +9,11 @@ angular.module('gRead')
   bookServiceApi.getAllBooks()
   .success(function(data) {
     $scope.bookList = data;
+  });
+
+  authorServiceApi.getAllAuthors()
+  .success(function(data) {
+    $scope.authorsList = data;
   });
 
   $scope.addBook = function () {
@@ -19,7 +24,7 @@ angular.module('gRead')
   };
 
 }])
-.controller('SingleBookCtrl', ['$scope', 'bookServiceApi', '$stateParams', '$location', function($scope,bookServiceApi,$stateParams, $location){
+.controller('SingleBookCtrl', ['$scope', 'bookServiceApi', '$stateParams', '$location', function($scope,bookServiceApi,$stateParams,$location){
 
   $scope.id = $stateParams.id;
 
@@ -34,5 +39,12 @@ angular.module('gRead')
       $location.url('/book/'+$scope.id);
     });
   };
+
+  $scope.deleteBook = function() {
+    bookServiceApi.deleteBook($scope.id)
+    .success(function(data) {
+      $location.url('/');
+    });
+  }
 
 }]);
