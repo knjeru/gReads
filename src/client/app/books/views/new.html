@@ -1,0 +1,21 @@
+<div class="container">
+  <form ng-submit="addBook()">
+    <div class="form-group">
+      <label for="">Title</label>
+      <input type="text" class="form-control" id="" placeholder="Enter Title" ng-model="bookFormData.title">
+    </div>
+    <label for="">Genre</label>
+    <select ng-model="bookFormData.genre">
+      <option value="javascript">Javascript</option>
+      <option value="python">Python</option>
+    </select>
+    <div class="form-group">
+      <label for="">Book Cover</label>
+      <input type="text" class="form-control" id="" placeholder="Enter Title" ng-model="bookFormData.coverImgUrl">
+    </div>
+    <div class="form-group">
+      <label for=""></label>
+      <textarea rows="8" cols="40" ng-model="bookFormData.description"></textarea>
+    </div>
+  </form>
+</div>
