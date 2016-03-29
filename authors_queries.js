@@ -1,17 +1,19 @@
 var knex = require('./db/knex');
 
 function Author() {
-  return knex('authors')
+  return knex('authors');
 }
 
 module.exports = {
     getAllAuthors: function() {
         return Author();
     },
+
     getAuthor: function(id) {
         return Author()
                 .where('id', id);
     },
+
     addAuthor: function(body) {
         return Author()
                 .insert({
@@ -21,8 +23,9 @@ module.exports = {
                    bio: body.bio,
                 });
     },
+
     updateAuthor: function(id, body) {
-        return Author
+        return Author()
                 .where('id', id)
                 .update({
                    first_name: body.first_name,
@@ -31,9 +34,10 @@ module.exports = {
                    bio: body.bio,
                 });
     },
+    
     deleteAuthor: function(id) {
-        return Author
+        return Author()
                 .where('id', id)
                 .del();
     }
-}
+};

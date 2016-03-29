@@ -1,0 +1,22 @@
+<div class="container">
+  <form ng-submit="updateAuthor()">
+    <div class="form-group">
+      <label for="">First Name:</label>
+      <input type="text" class="form-control" id="" ng-model="authorFormData.first_name" ng-value="author.first_name">
+    </div>
+    <div class="form-group">
+      <label for="">Last Name:</label>
+      <input type="text" class="form-control" id="" ng-model="authorFormData.last_name" ng-value="author.last_name">
+    </div>
+    <div class="form-group">
+      <label for="">Author Portrait:</label>
+      <input type="url" class="form-control" id="" ng-model="authorFormData.portraitUrl" ng-value="author.portraitUrl">
+    </div>
+    <div class="form-group">
+      <label for="">Biography:</label>
+      <textarea rows="8" cols="40" ng-model="authorFormData.bio" ng-init="authorFormData.bio='{{author.bio}}'">{{author.bio}}</textarea>
+    </div>
+    <button class="btn btn-primary" type="submit" name="button">Add Author</button>
+    <a ui-sref="authors"><button class="btn btn-warning" type="button" name="button">Cancel</button></a>
+  </form>
+</div>

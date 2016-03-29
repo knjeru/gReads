@@ -35,4 +35,11 @@ angular.module('gRead')
     });
   };
 
+  $scope.deleteAuthor = function() {
+    authorServiceApi.deleteAuthor($scope.id)
+    .success(function(data) {
+      $location.url('/');
+    });
+  };
+
 }]);

@@ -5,12 +5,47 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var jwt = require('jsonwebtoken');
+var bcrypt = require('bcrypt');
+var request = require('request');
+var protectApi = express.Router();
 
 // *** routes *** //
 var routes = require('./routes/index.js');
 var books = require('./routes/books.js');
 var authors = require('./routes/authors.js');
+var authorization = require('./routes/authorization.js');
 
+protectApi.use(function(req, res, next) {
+
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  // decode token
+  if (token) {
+
+    // verifies secret and checks exp
+    jwt.verify(token, 'superSecret', function(err, decoded) {
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
+      } else {
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;
+        next();
+      }
+    });
+
+  } else {
+
+    // if there is no token
+    // return an error
+    return res.status(403).send({
+        success: false,
+        message: 'No token provided.'
+    });
+
+  }
+});
 
 // *** express instance *** //
 var app = express();
@@ -28,6 +63,8 @@ app.get('/', function(req,res,next) {
     res.sendFile(path.join(__dirname, '../client/app/', 'index.html'));
 });
 app.use('/', routes);
+app.use('/auth', authorization);
+app.use('/api', protectApi);
 app.use('/api/books', books);
 app.use('/api/authors', authors);
 

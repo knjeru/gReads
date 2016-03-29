@@ -1,8 +1,7 @@
 'use strict';
 
-angular.module('gRead', ['ui.router', 'door3.css'])
-.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
-
+angular.module('gRead', ['ui.router', 'door3.css', 'ngStorage'])
+.config(['$stateProvider', '$urlRouterProvider','$httpProvider', function($stateProvider, $urlRouterProvider,$httpProvider){
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
@@ -49,5 +48,35 @@ angular.module('gRead', ['ui.router', 'door3.css'])
       url: '/author/:id/edit',
       templateUrl: '/app/authors/views/edit.html',
       controller: 'SingleAuthorCtrl',
+    })
+    .state('register', {
+      url:'/register',
+      templateUrl: '/app/authorization/views/register.html',
+      controller: 'LoginCtrl'
+    })
+    .state('login', {
+      url:'/login',
+      templateUrl: '/app/authorization/views/login.html',
+      controller: 'LoginCtrl'
     });
+
+       $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
+       return {
+           'request': function (config) {
+                console.log($localStorage.token);
+
+               config.headers = config.headers || {};
+               if ($localStorage.token) {
+                   config.headers['x-access-token'] = $localStorage.token;
+               }
+               return config;
+           },
+           'responseError': function (response) {
+               if (response.status === 401 || response.status === 403) {
+                   $location.path('/login');
+               }
+               return $q.reject(response);
+           }
+       };
+     }]);
 }]);
