@@ -12,18 +12,20 @@
     <link rel="stylesheet" ng-href="{{css}}">
   </head>
   <body>
-    <!-- <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <ul class="nav nav-tabs">
-          <a class="navbar-link" ui-sref='home'><li>Home Page</li></a>
-          <a class="navbar-link" ui-sref='books'><li>All Books</li></a>
-          <a class="navbar-link" ui-sref='addBook'><li>Add Book</li></a>
-          <a class="navbar-link" ui-sref='authors'><li>All Authors</li></a>
-          <a class="navbar-link" ui-sref='addAuthor'><li>Add Author</li></a>
-        </ul>
-      </div>
-    </nav> -->
-    <div ui-view>
+    <!-- <div class="row">
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+          <ul class="nav nav-tabs">
+            <a class="navbar-link" ui-sref='home'><li>Home Page</li></a>
+            <a class="navbar-link" ui-sref='books'><li>All Books</li></a>
+            <a class="navbar-link" ui-sref='addBook'><li>Add Book</li></a>
+            <a class="navbar-link" ui-sref='authors'><li>All Authors</li></a>
+            <a class="navbar-link" ui-sref='addAuthor'><li>Add Author</li></a>
+          </ul>
+        </div>
+      </nav>
+    </div> -->
+    <div class="container" ui-view>
       <!-- Partials here -->
     </div>
     <script src="/app/app.js" charset="utf-8"></script>

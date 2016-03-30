@@ -18,7 +18,7 @@ router.post('/register', function(req, res, next) {
             status: 'danger',
             message: 'Email already exists.!'
           });
-          return res.redirect('/register');
+          // return res.redirect('/register');
       } else {
         // hash and salt the password
         var hashedPassword = helpers.hashing(password);

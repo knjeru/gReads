@@ -63,8 +63,6 @@ angular.module('gRead', ['ui.router', 'door3.css', 'ngStorage'])
        $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
        return {
            'request': function (config) {
-                console.log($localStorage.token);
-
                config.headers = config.headers || {};
                if ($localStorage.token) {
                    config.headers['x-access-token'] = $localStorage.token;

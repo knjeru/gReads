@@ -2,9 +2,14 @@
 
 angular.module('gRead')
 .controller('MainBookCtrl',['$scope', 'bookServiceApi','$location', 'authorServiceApi',function($scope,bookServiceApi,$location,authorServiceApi){
-
-  $scope.bookList = {};
+  $scope.titleFilter = null;
+  $scope.bookList = [];
   $scope.bookFormData = {};
+
+  $scope.searchFilter = function(book) {
+  var keyword = new RegExp($scope.titleFilter, 'i');
+  return !$scope.titleFilter || keyword.test(book.title) || keyword.test(book.genre);
+};
 
   bookServiceApi.getAllBooks()
   .success(function(data) {
@@ -45,6 +50,6 @@ angular.module('gRead')
     .success(function(data) {
       $location.url('/');
     });
-  }
+  };
 
 }]);
