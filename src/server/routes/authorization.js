@@ -7,15 +7,6 @@ var jwt = require('jsonwebtoken');
 function hashing (password) {
   var salt = bcrypt.genSaltSync(10);
   return bcrypt.hashSync(password, salt);
-  // Needs promises otherwise it will not wait to return the newPassword which
-    // will make it undefined
-//   var newPassword = '';
-//   bcrypt.genSalt(10, function(err, salt) {
-//     bcrypt.hash(password, salt, function(err, hash) {
-//         newPassword = hash;
-//     });
-//   });
-//   return newPassword;
 }
 
 function comparePassword(password, hashedpassword) {
@@ -38,17 +29,14 @@ router.post('/register', function(req, res, next) {
           });
           return res.redirect('/register');
       } else {
-        console.log('this is email: ' + email + ' and this is the password: ' + password);
         // hash and salt the password
         var hashedPassword = hashing(password);
-        console.log(hashedPassword);
         // if email is not in the database insert it
         knex('users').insert({
           email: email,
           password: hashedPassword
         })
         .then(function(data) {
-          console.log('inside of then');
           // res.send({token: createJWT(data)});
           res.json('message', {
             status: 'success',
@@ -84,11 +72,8 @@ router.post('/login', function(req, res, next) {
           // console.log(user.password);
           // passwords match! return user
           var token = jwt.sign(user, 'superSecret', {
-            expiresIn: 14400 // expires in 24 hours;
+            expiresInMinutes: 1440
           });
-
-          console.log(token);
-
           res.json({
             success: true,
             message: 'Enjoy your token!',
