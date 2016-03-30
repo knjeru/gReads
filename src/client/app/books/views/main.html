@@ -3,12 +3,12 @@
   <div ng-repeat="book in bookList | filter: searchFilter">
     <div class="row">
       <a ng-href="#/book/{{book.id}}"><img ng-src="{{book.coverImgUrl}}"/></a>
-      <p>{{book.title}}</p>
-      <p ng-show="{{book.genre}}">{{book.genre}}</p>
-      <p>{{book.description}}</p>
-      <p>{{book.author_one}}</p>
-      <p ng-show="{{book.author_two}}">{{book.author_two}}</p>
-      <p ng-show="{{book.author_two}}">{{book.author_three}}</p>
+      <p>Title: {{book.title}}</p>
+      <p ng-show="{{book.genre}}">Genre: {{book.genre}}</p>
+      <p>Description: {{book.description}}</p>
+      <p>Author: {{book.author_one}}</p>
+      <p ng-show="{{book.author_two}}">Author: {{book.author_two}}</p>
+      <p ng-show="{{book.author_two}}">Author: {{book.author_three}}</p>
     </div>
   </div>
 </div>
