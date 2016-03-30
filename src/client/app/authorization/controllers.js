@@ -19,7 +19,7 @@ angular.module('gRead')
             });
         };
 
-        $scope.signup = function () {
+        $scope.register = function () {
             var formData = {
                 email: $scope.email,
                 password: $scope.password
@@ -28,6 +28,8 @@ angular.module('gRead')
             Auth.signup(formData, successAuth, function () {
                 $rootScope.error = 'Failed to signup';
             });
+
+            $location.url('/login');
         };
 
         $scope.logout = function () {
